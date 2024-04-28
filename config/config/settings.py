@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bot.apps.BotConfig',
     'management.apps.ManagementConfig',
+    'smart_selects',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
