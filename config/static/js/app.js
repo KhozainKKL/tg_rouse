@@ -31,7 +31,7 @@ btn1.addEventListener("click", function(){
             // Обновляем содержимое элемента с id "result" данными из ответа
             document.getElementById('result').innerHTML = '<p>' + data.phone + '</p>';
         } else {
-            document.getElementById('result').innerHTML = '<p>' + 'Request failed with status:' xhr.status + '</p>';
+            document.getElementById('result').innerHTML = '<p>' + 'Request failed with status' + '</p>';
         }
     };
 
