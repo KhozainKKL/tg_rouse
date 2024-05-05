@@ -1,6 +1,10 @@
+import urllib
+
+import requests
 from asgiref.sync import async_to_sync, sync_to_async
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.template import Template, Context
 from rest_framework.response import Response
 from rest_framework.request import Request
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
@@ -20,13 +24,18 @@ def thread():
 @bot.message_handler(commands=['start'])
 async def start_message(message: Request):
     data = {
-        'name': await thread(),
+        'name': '12333322',
     }
-    result = render(message, 'https://khozainkkl.github.io/tg_rouse.github.io/config/static/templates/index.html',
-                    context=data)
+    # URL вашей веб-страницы
+    base_url = 'https://khozainkkl.github.io/tg_rouse.github.io/config/static/templates/index.html'
+
+    # Кодирование данных в формат URL и добавление их к URL веб-страницы
+    encoded_data = urllib.parse.urlencode(data)
+    web_page_url = f'{base_url}?{encoded_data}'
+
     markup = ReplyKeyboardMarkup()
     markup.add(KeyboardButton('Открыть веб страницу', web_app=WebAppInfo(
-        url=result)))
+        url=web_page_url)))
     await bot.send_message(chat_id=message.chat.id, text='Привет.', reply_markup=markup)
 
 
