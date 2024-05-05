@@ -183,7 +183,7 @@
                 <input type="email" required="" class="input-email" name="email" id="user_email">
                 <label class="email-label" for="user_email">email</label>
                 <div id="error"></div>
-                <p>{{ name }}</p>
+                <p id="name"></p>
             </div>
             <button id="order" type="submit">Авторизоваться</button>
         </form>
@@ -197,6 +197,11 @@
         let order = document.getElementById("order");
         let phoneInput = document.getElementById("user_phone");
         tg.expand();
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name');
+
+        // Обновление содержимого элемента с id "name" на странице
+        document.getElementById('name').innerText = name;
 
         phoneInput.addEventListener("input", function() {
             let phoneNumber = phoneInput.value.replace(/\D/g, '');
