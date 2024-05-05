@@ -183,6 +183,7 @@
                 <input type="email" required="" class="input-email" name="email" id="user_email">
                 <label class="email-label" for="user_email">email</label>
                 <div id="error"></div>
+                <p>{{ data.name }}</p>
             </div>
             <button id="order" type="submit">Авторизоваться</button>
         </form>
@@ -214,8 +215,14 @@
             let phone = phoneInput.value;
             let errorField = document.getElementById("error");
 
-            if (card.length < 1) {
-                errorField.innerText = 'ID Карты клиента пуст';
+            if (name.length < 1) {
+                errorField.innerText = 'Введите свое Имя';
+                errorField.style.display = 'block'; // Показываем поле с ошибкой
+                event.preventDefault(); // Предотвращаем отправку формы
+                return;
+            }
+            if (family.length < 1) {
+                errorField.innerText = 'Введите свою Фамилию';
                 errorField.style.display = 'block'; // Показываем поле с ошибкой
                 event.preventDefault(); // Предотвращаем отправку формы
                 return;
@@ -233,7 +240,6 @@
                 email: email,
                 phone: phone,
             }
-            console.log(data);
             tg.sendData(JSON.stringify(data));
 
             tg.close();

@@ -1,8 +1,8 @@
 from django.urls import path
 
-from bot.views import UpdateBot, profile_api
+from bot.views import start_message, profile_api
 
 urlpatterns = [
-    path('', UpdateBot.as_view(), name='update'),
+    path('', start_message, name='update'),
     path('api/profile/', profile_api, name='profile_api'),
 ]
