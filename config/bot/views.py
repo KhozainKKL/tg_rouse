@@ -14,28 +14,22 @@ from telebot import types
 
 from bot.models import Profile
 
-
-@sync_to_async
-def thread():
-    profile = Profile.objects.get(id=1)
-    return profile
-
-
 @bot.message_handler(commands=['start'])
 async def start_message(message: Request):
+    print(message.from_user.chat.id)
     data = {
         'name': '12333322',
     }
     # URL вашей веб-страницы
     base_url = 'https://khozainkkl.github.io/tg_rouse.github.io/config/static/templates/index.html'
 
-    # Кодирование данных в формат URL и добавление их к URL веб-страницы
-    encoded_data = urllib.parse.urlencode(data)
-    web_page_url = f'{base_url}?{encoded_data}'
+    # # Кодирование данных в формат URL и добавление их к URL веб-страницы
+    # encoded_data = urllib.parse.urlencode(data)
+    # web_page_url = f'{base_url}?{encoded_data}'
 
     markup = ReplyKeyboardMarkup()
     markup.add(KeyboardButton('Открыть веб страницу', web_app=WebAppInfo(
-        url=web_page_url)))
+        url=base_url)))
     await bot.send_message(chat_id=message.chat.id, text='Привет.', reply_markup=markup)
 
 
