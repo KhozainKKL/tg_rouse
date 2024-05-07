@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 productPrice.textContent = `Цена: $${product.price}`;
 
                 const productImage = document.createElement('img');
-                productImage.src = product.image; // Путь к изображению товара
+                productImage.src = "../../media/" + product.image; // Путь к изображению товара
                 productImage.alt = product.name; // Альтернативный текст для изображения
 
                 const quantityInput = document.createElement('div');
