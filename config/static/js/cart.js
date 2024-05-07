@@ -48,6 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 const productPrice = document.createElement('p');
                 productPrice.textContent = `Цена: $${product.price}`;
 
+                const productImage = document.createElement('img');
+                productImage.src = product.image; // Путь к изображению товара
+                productImage.alt = product.name; // Альтернативный текст для изображения
+
                 const quantityInput = document.createElement('div');
                 quantityInput.classList.add('quantity-input-container');
 
@@ -88,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 removeButton.classList.add('remove-btn');
                 removeButton.textContent = 'Удалить';
 
+                itemDetails.appendChild(productImage); // Добавляем изображение в элемент товара
                 itemDetails.appendChild(productName);
                 itemDetails.appendChild(productDescription);
                 itemDetails.appendChild(productPrice);
