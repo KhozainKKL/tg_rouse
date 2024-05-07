@@ -37,7 +37,6 @@ async def start_message(message):
 async def cart(message):
     encoded_data = urllib.parse.quote(json.dumps(await db.get_all_product()))
     url = f"https://khozainkkl.github.io/tg_rouse.github.io/config/static/templates/cart.html?product={encoded_data}"
-
     markup = ReplyKeyboardMarkup()
     markup.add(KeyboardButton('Корзина 🧺', web_app=WebAppInfo(
         url=url)))
