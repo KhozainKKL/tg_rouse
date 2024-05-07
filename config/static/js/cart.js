@@ -48,11 +48,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 const productPrice = document.createElement('p');
                 productPrice.textContent = `Цена: $${product.price}`;
 
-                const quantityInput = document.createElement('input');
-                quantityInput.setAttribute('type', 'number');
-                quantityInput.classList.add('quantity-input');
-                quantityInput.setAttribute('value', '1');
-                quantityInput.setAttribute('min', '1');
+                const quantityInput = document.createElement('div');
+                quantityInput.classList.add('quantity-input-container');
+
+                const minusButton = document.createElement('button');
+                minusButton.classList.add('quantity-btn');
+                minusButton.textContent = '-';
+                minusButton.addEventListener('click', function() {
+                    const input = quantityInput.querySelector('input');
+                    input.value = Math.max(parseInt(input.value) - 1, 1);
+                    calculateTotalPrice();
+                });
+
+                const quantityInputField = document.createElement('input');
+                quantityInputField.setAttribute('type', 'number');
+                quantityInputField.classList.add('quantity-input');
+                quantityInputField.setAttribute('value', '1');
+                quantityInputField.setAttribute('min', '1');
+
+                const plusButton = document.createElement('button');
+                plusButton.classList.add('quantity-btn');
+                plusButton.textContent = '+';
+                plusButton.addEventListener('click', function() {
+                    const input = quantityInput.querySelector('input');
+                    input.value = parseInt(input.value) + 1;
+                    calculateTotalPrice();
+                });
+
+                quantityInput.appendChild(minusButton);
+                quantityInput.appendChild(quantityInputField);
+                quantityInput.appendChild(plusButton);
 
                 const itemActions = document.createElement('div');
                 itemActions.classList.add('item-actions');
@@ -82,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
             addQuantityInputEventListeners();
         }
     }
+
 
     function addRemoveButtonEventListeners() {
         const removeButtons = document.querySelectorAll('.remove-btn');
@@ -157,13 +183,13 @@ document.addEventListener('DOMContentLoaded', function() {
         data.total_price = totalPrice;
 
         // Отправляем данные на сервер
-<!--                console.log(data);-->
-<!--                event.preventDefault();-->
-        tg.sendData(JSON.stringify(data));
-        tg.close();
-    }
+//        console.log(data);
+//        event.preventDefault();
+    tg.sendData(JSON.stringify(data));
+    tg.close();
+}
 
-    checkCartIsEmpty();
-    populateCartFromUrl();
-    orderButton.addEventListener('click', sendOrderData);
+checkCartIsEmpty();
+populateCartFromUrl();
+orderButton.addEventListener('click', sendOrderData);
 });
