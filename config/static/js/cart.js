@@ -55,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 minusButton.classList.add('quantity-btn');
                 minusButton.textContent = '-';
                 minusButton.addEventListener('click', function() {
+                    event.preventDefault();
                     const input = quantityInput.querySelector('input');
                     input.value = Math.max(parseInt(input.value) - 1, 1);
                     calculateTotalPrice();
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 plusButton.classList.add('quantity-btn');
                 plusButton.textContent = '+';
                 plusButton.addEventListener('click', function() {
+                    event.preventDefault();
                     const input = quantityInput.querySelector('input');
                     input.value = parseInt(input.value) + 1;
                     calculateTotalPrice();
