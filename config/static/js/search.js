@@ -6,12 +6,15 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
 // Получаем ссылки на элементы <select>
-const sortSelect = document.getElementById('sort');
-const categorySelect = document.getElementById('category');
-const colorSelect = document.getElementById('color');
+const sortParams = urlParams.get('sort');
+const decodedSortParams = decodeURIComponent(sortParams);
+const sortOptions = JSON.parse(decodedSortParams);
+
+const categoryParams = urlParams.get('category');
+const decodedCategoryParams = decodeURIComponent(categoryParams);
+const categoryOptions = JSON.parse(decodedCategoryParams);
 
 // Заполняем список опций для элемента <select> с id="sort"
-const sortOptions = urlParams.getAll('sort');
 sortOptions.forEach(option => {
     const optionElement = document.createElement('option');
     optionElement.value = option;
@@ -20,19 +23,11 @@ sortOptions.forEach(option => {
 });
 
 // Заполняем список опций для элемента <select> с id="category"
-const categoryOptions = urlParams.getAll('category');
 categoryOptions.forEach(option => {
     const optionElement = document.createElement('option');
     optionElement.value = option;
     optionElement.textContent = option;
     categorySelect.appendChild(optionElement);
-});
-const colorOptions = urlParams.getAll('color');
-colorOptions.forEach(option => {
-    const optionElement = document.createElement('option');
-    optionElement.value = option;
-    optionElement.textContent = option;
-    colorSelect.appendChild(optionElement);
 });
 
 
@@ -46,8 +41,8 @@ colorOptions.forEach(option => {
         category: categoryValue,
         color: colorValue
     };
-<!--            console.log(data);-->
-<!--            event.preventDefault();-->
+//console.log(data);
+//event.preventDefault();
 
 
     tg.sendData(JSON.stringify(data));
