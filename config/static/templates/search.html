@@ -98,17 +98,13 @@
         <img src="../media/Новая папка/logo.jpg" alt="Логотип">
         <form id="form" datatype="application/json" method="post">
             <div class="container input-group">
-               <label class="user-label" for="sort">Сорт</label>
-                <select class="input-user" id="sort">
-                  <option value="">--Выберите сорт--</option>
-                </select>
                 <label class="user-label" for="category">Категория</label>
                 <select class="input-user" id="category">
                   <option value="">--Выберите категорию--</option>
                 </select>
-                <label class="user-label" for="color">Цвет</label>
-                <select class="input-user" id="color">
-                  <option value="">--Выберите цвет--</option>
+                <label id="label-sort" class="user-label" for="sort">Сорт</label>
+                <select class="input-user" id="sort">
+                  <option value="">--Выберите сорт--</option>
                 </select>
             </div>
             <button id="search" type="submit">Поиск</button>
