@@ -1,12 +1,10 @@
 from django.core import validators
 from django.db import models
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from smart_selects.db_fields import GroupedForeignKey
 
 # параметр делающий email уникальным для каждого пользователя
-User._meta.get_field('email')._unique = True
 
 
 class Category(models.Model):
@@ -94,8 +92,7 @@ class Order(models.Model):
     Returns:
         _type_: _description_
     """
-    name = models.CharField(max_length=50, verbose_name='Клиент')
-    email = models.EmailField(verbose_name='Email')
+    name = models.ForeignKey('Profile', on_delete=models.CASCADE, verbose_name='Клиент')
     address = models.CharField(max_length=250, verbose_name='Адрес')
     created = models.DateTimeField(auto_now_add=True, verbose_name='Создано')
     updated = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
@@ -125,19 +122,17 @@ class OrderItem(models.Model):
     def __str__(self):
         return '{}'.format(self.id)
 
-    def get_cost(self):
-        return self.price * self.quantity
 
-
-# Модель расширения базовой модели User
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    username = models.CharField(null=True, blank=True, max_length=20, verbose_name='Логин')
+    first_name = models.CharField(null=True, blank=True, max_length=20, verbose_name='Имя')
+    last_name = models.CharField(null=True, blank=True, max_length=30, verbose_name='Фамилия')
     image = models.ImageField(null=True, blank=True, upload_to='sales/image/', verbose_name='Фотография')
     phone = models.CharField(blank=True, null=True, max_length=18, verbose_name='Номер телефона')
     geo = models.TextField(max_length=100, blank=True, null=True, verbose_name='Адрес')
     email_push = models.BooleanField(default=False, verbose_name='Подписка по email')
-    phone_push = models.BooleanField(default=False, verbose_name='Подписка по SMS')
     cart = models.IntegerField(blank=True, null=True, verbose_name='Номер дебетовой карты')
+    telegram_id = models.IntegerField(blank=True, null=True, verbose_name='ID Телеграмм')
 
     def __str__(self):
         return f'{self.user}'
@@ -145,14 +140,3 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
