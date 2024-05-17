@@ -6,5 +6,5 @@ __all__ = (
 )
 
 from .base import Base
-from .product import Product
+from .database import Product
 from .db_helper import db_helper, DatabaseHelper
