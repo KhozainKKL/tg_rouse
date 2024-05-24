@@ -16,7 +16,7 @@ class UserBase(BaseModel):
     phone: int | None
     geo: str | None
     push_email: bool = False
-    telegram_id: int | None
+    telegram_id: int
 
 
 class CreateUser(UserBase):

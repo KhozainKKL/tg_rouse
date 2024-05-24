@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api_v1.users.schemas import CreateUser, User
@@ -21,3 +21,17 @@ async def get_users(
     session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
     return await crud.get_users(session=session)
+
+
+@router.get("/{telegram_id}/", response_model=User)
+async def get_user(
+    telegram_id: int,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    user = await crud.get_user(session=session, telegram_id=telegram_id)
+    if user:
+        return user
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"User from telegram_id:{telegram_id} not found",
+    )

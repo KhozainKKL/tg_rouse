@@ -25,7 +25,7 @@ class Profile(Base):
     phone: Mapped[int | None]
     geo: Mapped[str | None]
     push_email: Mapped[bool] = mapped_column(default=False, nullable=True)
-    telegram_id: Mapped[int | None]
+    telegram_id: Mapped[int]
 
 
 class Cart(Base):
