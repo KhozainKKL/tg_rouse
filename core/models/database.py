@@ -29,11 +29,16 @@ class Profile(Base):
 
 
 class Cart(Base):
-    user: Mapped[int] = mapped_column(ForeignKey(Profile.id, ondelete="CASCADE"))
+    user: Mapped[int] = mapped_column(
+        ForeignKey(Profile.telegram_id, ondelete="CASCADE")
+    )
     product: Mapped[int] = mapped_column(ForeignKey(Product.id, ondelete="CASCADE"))
     quantity: Mapped[int] = mapped_column(default=1)
 
 
 class Order(Base):
-    user: Mapped[int] = mapped_column(ForeignKey(Profile.id, ondelete="CASCADE"))
-    product: Mapped[int] = mapped_column(ForeignKey(Product.id, ondelete="CASCADE"))
+    user: Mapped[int] = mapped_column(
+        ForeignKey(Profile.telegram_id, ondelete="CASCADE")
+    )
+    cart: Mapped[int] = mapped_column(ForeignKey(Cart.id, ondelete="CASCADE"))
+    paid: Mapped[bool] = mapped_column(default=False, nullable=True)

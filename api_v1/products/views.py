@@ -35,3 +35,20 @@ async def get_product(
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Product {product_id} not found",
     )
+
+
+@router.get("/search/{name}/", response_model=list[Product])
+async def get_search_products(
+    name: str,
+    session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
+    products = await crud.get_search_products(
+        session=session,
+        name=name,
+    )
+    if products:
+        return products
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=f"Product {name} not found",
+    )

@@ -5,7 +5,9 @@ Update
 Delete
 """
 
-from sqlalchemy import select
+from typing import Tuple, Sequence
+
+from sqlalchemy import select, Result
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.models import Product
 from sqlalchemy.engine import Result
@@ -29,3 +31,14 @@ async def create_product(session: AsyncSession, product_in: ProductCreate) -> Pr
     await session.commit()
     await session.refresh(product)
     return product
+
+
+async def get_search_products(
+    session: AsyncSession,
+    name: str,
+) -> Sequence[Product]:
+    search_pattern = f"%{name}%"
+    result = await session.execute(
+        select(Product).filter(Product.name.like(search_pattern))
+    )
+    return result.scalars().all()
