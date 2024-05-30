@@ -41,32 +41,53 @@ $('.tab a').on('click', function (e) {
     $(target).fadeIn(600);
 
 });
+document.addEventListener("DOMContentLoaded", function() {
 
-let tg = window.Telegram.WebApp;
-let register = document.getElementById("register");
-tg.expand();
+    let tg = window.Telegram.WebApp;
+    let register = document.getElementById("register");
+    tg.expand();
 
-register.addEventListener("click", () => {
-    let fisrt_name = document.getElementById("first_name").value;
-    let last_name = document.getElementById("last_name").value;
-    let email = document.getElementById("email-register").value;
-    let password = document.getElementById("password-register").value;
+    register.addEventListener("click", async (event) => {
+        event.preventDefault();
 
-    let data = {
-      email: email,
-      password: password,
-      is_active: true,
-      is_superuser: false,
-      is_verified: false,
-      first_name: fisrt_name,
-      last_name: last_name,
-      telegram_id: 11111,
-      phone: 0,
-      geo: "string"
-    }
+        let fisrt_name = document.getElementById("first_name").value;
+        let last_name = document.getElementById("last_name").value;
+        let email = document.getElementById("email-register").value;
+        let password = document.getElementById("password-register").value;
+
+        let data = {
+            email: email,
+            password: password,
+            is_active: true,
+            is_superuser: false,
+            is_verified: false,
+            first_name: fisrt_name,
+            last_name: last_name,
+            telegram_id: 11111,
+            phone: 0,
+            geo: "string"
+        }
 
 
-    tg.sendData(JSON.stringify(data));
+        try {
+            let response = await fetch('http://127.0.0.1:8080/api/v1/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
 
-    tg.close();
+            if (response.ok) {
+                let result = await response.json();
+                tg.sendData(JSON.stringify(result));
+                console.log(result);
+                tg.close();
+            } else {
+                console.error('Ошибка регистрации:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Ошибка регистрации:', error);
+        }
+    });
 });
