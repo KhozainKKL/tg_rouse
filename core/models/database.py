@@ -19,10 +19,9 @@ class Product(Base):
 
 
 class Profile(SQLAlchemyBaseUserTable[int], Base):
-    username: Mapped[str]
     first_name: Mapped[str | None]
     last_name: Mapped[str | None]
-    email: Mapped[str | None]
+    email: Mapped[str]
     phone: Mapped[int | None]
     geo: Mapped[str | None]
     push_email: Mapped[bool] = mapped_column(default=False, nullable=True)

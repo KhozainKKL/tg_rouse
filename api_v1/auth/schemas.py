@@ -9,11 +9,6 @@ class UserRead(schemas.BaseUser[int]):
 
 
 class UserCreate(schemas.BaseUserCreate):
-    username: Annotated[
-        str,
-        MinLen(3),
-        MaxLen(20),
-    ]
     first_name: str | None
     last_name: str | None
     telegram_id: int

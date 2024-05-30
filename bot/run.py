@@ -43,7 +43,7 @@ async def start_message(message):
 async def cart(message):
     encoded_data = urllib.parse.quote(
         json.dumps(
-            await db.get_fetch_data(url_template="cart/", data_id=message.from_user.id)
+            await db.get_fetch_data(url_template="cart", data_id=message.from_user.id)
         )
     )
     url = BASE_URL + f"cart.html?product={encoded_data}"

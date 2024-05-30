@@ -5,11 +5,6 @@ from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 class UserBase(BaseModel):
-    username: Annotated[
-        str,
-        MinLen(3),
-        MaxLen(20),
-    ]
     first_name: str | None
     last_name: str | None
     email: EmailStr
