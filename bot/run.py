@@ -30,7 +30,7 @@ BASE_URL = env.str("BASE_URL")
 async def start_message(message):
 
     # Кодирование данных в формат URL и добавление их к URL веб-страницы
-    web_page_url = BASE_URL + "index.html"
+    web_page_url = BASE_URL + "auth.html"
 
     markup = ReplyKeyboardMarkup()
     markup.add(

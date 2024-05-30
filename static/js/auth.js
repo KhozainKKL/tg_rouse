@@ -60,7 +60,9 @@ register.addEventListener("click", () => {
       is_verified: false,
       first_name: fisrt_name,
       last_name: last_name,
-      telegram_id: tg.initDataUnsafe.user.id,
+      telegram_id: 11111,
+      phone: 0,
+      geo: "string"
     }
 
 
