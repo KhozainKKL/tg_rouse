@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy import ForeignKey, text
 from sqlalchemy.orm import Mapped, mapped_column
 from .base import Base
+from fastapi_users.db import SQLAlchemyBaseUserTable
 
 
 class Product(Base):
@@ -17,7 +18,7 @@ class Product(Base):
     archived: Mapped[bool] = mapped_column(default=False, nullable=True)
 
 
-class Profile(Base):
+class Profile(SQLAlchemyBaseUserTable[int], Base):
     username: Mapped[str]
     first_name: Mapped[str | None]
     last_name: Mapped[str | None]

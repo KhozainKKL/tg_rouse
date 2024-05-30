@@ -13,13 +13,15 @@ env.read_env()
 API = env.str("API")
 
 
-# Функция для получения данных из FastAPI
-async def fetch_data(data, data_id=None):
-    if not data_id:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(API + f"{data}/") as response:
-                return await response.json()
-    else:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(API + f"{data}/{data_id}/") as response:
-                return await response.json()
+class DatabaseRequestToBot:
+    # Функция для получения данных из FastAPI
+    @staticmethod
+    async def get_fetch_data(url_template: str, data_id: int = None):
+        if not data_id:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(API + f"{url_template}/") as response:
+                    return await response.json()
+        else:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(API + f"{url_template}/{data_id}/") as response:
+                    return await response.json()
