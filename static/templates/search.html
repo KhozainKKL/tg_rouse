@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Поиск</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap')
+
+
+        #form {
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Monserrat', sans-serif;
+            font-weight: 200;
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+            text-align: -webkit-center;
+        }
+
+        #main {
+            text-align: center;
+            max-width: 230px;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 50px;
+            margin-bottom: 10px;
+            border-bottom: inset;
+            border-bottom-color: #ffd19a;
+            border-radius: 40%;
+        }
+
+        img {
+            max-width: 200px;
+            margin: 30px auto;
+            box-shadow: 5px 6px 7px #6d6262;
+            border-radius: 50%;
+        }
+
+        button {
+            border: 0;
+            border-radius: 5px;
+            margin-top:50px;
+            height: 60px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 500ms cubic-bezier(0.63, 0, 0, 1.17);
+            color: var(--tg-theme-text-color);
+            background: var(--tg-theme-bg-color);
+            background-color: #7ec01e;
+        }
+
+        button:hover {
+            background: var(--tg-theme-secondary-bg-color);
+        }
+
+        .container {
+            border: 0;
+            border-radius: 20px;
+            background-color: bisque;
+            padding: 20px 0 0 0;
+            border-bottom: groove;
+            flex-wrap: wrap;
+            display: flex;
+            text-align: center;
+            place-content: center;
+            flex-direction: column;
+        }
+        label {
+            color: var(--tg-theme-text-color);
+        }
+        option {
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="main" id="main">
+        <h1>ЛПХ "Науменко"</h1>
+        <img src="../media/Новая папка/logo.jpg" alt="Логотип">
+        <form id="form" datatype="application/json" method="post">
+            <div class="container input-group">
+                <label class="user-label" for="category">Категория</label>
+                <select class="input-user" id="category">
+                  <option value="">--Выберите категорию--</option>
+                </select>
+                <label id="label-sort" class="user-label" for="sort">Сорт</label>
+                <select class="input-user" id="sort">
+                  <option value="">--Выберите сорт--</option>
+                </select>
+            </div>
+            <button id="search" type="submit">Поиск</button>
+        </form>
+
+    </div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="../js/search.js"></script>
+
+</body>
+</html>
