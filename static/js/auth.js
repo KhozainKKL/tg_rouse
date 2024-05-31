@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let tg = window.Telegram.WebApp;
     tg.showAlert(`Добро пожаловать, #${WebApp.WebAppUser.id} @${WebApp.WebAppUser.username}.`);
-
+    document.getElementById("demo").innerHTML = tg.initDataUnsafe.user.id;
     let register = document.getElementById("register");
     tg.expand();
 
