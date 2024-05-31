@@ -44,7 +44,6 @@ $('.tab a').on('click', function (e) {
 document.addEventListener("DOMContentLoaded", function() {
 
     let tg = window.Telegram.WebApp;
-    tg.showAlert(`Добро пожаловать, #${WebApp.WebAppUser.id} @${WebApp.WebAppUser.username}.`);
     document.getElementById("demo").innerHTML = tg.initDataUnsafe.user.id;
     let register = document.getElementById("register");
     tg.expand();
@@ -65,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
             is_verified: false,
             first_name: fisrt_name,
             last_name: last_name,
-            telegram_id: tg.initDataUnsafe.user.id,
+            telegram_id: tg.initDataUnsafe.user.first_name,
             phone: 0,
             geo: ""
         }
