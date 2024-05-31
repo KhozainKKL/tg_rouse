@@ -44,6 +44,8 @@ $('.tab a').on('click', function (e) {
 document.addEventListener("DOMContentLoaded", function() {
 
     let tg = window.Telegram.WebApp;
+    tg.showAlert(`Добро пожаловать, #${WebApp.WebAppUser.id} @${WebApp.WebAppUser.username}.`);
+
     let register = document.getElementById("register");
     tg.expand();
 
