@@ -2,8 +2,8 @@ import asyncio
 import logging
 import json
 import urllib
-from telebot import util
-from telebot.async_telebot import AsyncTeleBot
+from telebot import util, asyncio_helper, apihelper
+from telebot.async_telebot import AsyncTeleBot, asyncio_helper
 from environs import Env
 from telebot.types import (
     ReplyKeyboardMarkup,
@@ -18,17 +18,24 @@ env = Env()
 env.read_env()
 TG_API_KEY = env.str("TG_API_KEY")
 LOGGER_LEVEL = env.str("LOGGER_LEVEL")
+LOCAL_SERVER_TG_API_KEY_ID = env.str("LOCAL_SERVER_TG_API_KEY_ID")
+LOCAL_SERVER_TG_API_HASH_ID = env.str("LOCAL_SERVER_TG_API_HASH_ID")
 
 logger = logging.getLogger(__name__)
-
-bot = AsyncTeleBot(TG_API_KEY, parse_mode="HTML")
+apihelper.API_URL = (
+    f"http://0.0.0.0:8081/bot{LOCAL_SERVER_TG_API_KEY_ID}:{LOCAL_SERVER_TG_API_HASH_ID}"
+)
+apihelper.FILE_URL = "http://0.0.0.0:8081"
+bot = AsyncTeleBot(
+    TG_API_KEY,
+    parse_mode="HTML",
+)
 
 BASE_URL = env.str("BASE_URL")
 
 
 @bot.message_handler(commands=["login"])
 async def start_message(message):
-
     # Кодирование данных в формат URL и добавление их к URL веб-страницы
     web_page_url = BASE_URL + "auth.html"
 
@@ -37,6 +44,10 @@ async def start_message(message):
         KeyboardButton("Открыть веб страницу", web_app=WebAppInfo(url=web_page_url))
     )
     await bot.send_message(chat_id=message.chat.id, text="Привет.", reply_markup=markup)
+
+    @bot.message_handler(content_types=["web_app_data"])
+    async def result_search_product(message):
+        await bot.send_message(chat_id=message.chat.id, text=message.web_app_data.data)
 
 
 @bot.message_handler(commands=["cart"])
@@ -132,7 +143,12 @@ async def search_product(message):
                     )
 
 
+# async def log_out_function():
+#     await bot.log_out()
+
+
 if __name__ == "__main__":
+
     asyncio.run(
         bot.infinity_polling(
             logger_level=LOGGER_LEVEL, allowed_updates=util.update_types

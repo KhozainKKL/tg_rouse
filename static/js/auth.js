@@ -63,11 +63,12 @@ document.addEventListener("DOMContentLoaded", function() {
             is_verified: false,
             first_name: fisrt_name,
             last_name: last_name,
-            telegram_id: 11111,
+            telegram_id: tg.initDataUnsafe.user.id,
             phone: 0,
-            geo: "string"
+            geo: ""
         }
-
+        console.log(data);
+        event.preventDefault();
 
         try {
             let response = await fetch('http://127.0.0.1:8080/api/v1/auth/register', {

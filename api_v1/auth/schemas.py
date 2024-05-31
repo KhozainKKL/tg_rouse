@@ -5,7 +5,11 @@ from fastapi_users import schemas
 
 
 class UserRead(schemas.BaseUser[int]):
-    pass
+    first_name: str | None
+    last_name: str | None
+    telegram_id: int
+    phone: int | None
+    geo: str | None
 
 
 class UserCreate(schemas.BaseUserCreate):
