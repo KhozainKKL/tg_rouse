@@ -40,9 +40,11 @@ async def start_message(message):
     # Кодирование данных в формат URL и добавление их к URL веб-страницы
     web_page_url = BASE_URL + "auth.html"
 
-    markup = ReplyKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
     markup.add(
-        KeyboardButton("Открыть веб страницу", web_app=WebAppInfo(url=web_page_url))
+        InlineKeyboardButton(
+            "Открыть веб страницу", web_app=WebAppInfo(url=web_page_url)
+        )
     )
     await bot.send_message(chat_id=message.chat.id, text="Привет.", reply_markup=markup)
 
