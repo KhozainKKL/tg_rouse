@@ -22,6 +22,7 @@ LOCAL_SERVER_TG_API_KEY_ID = env.str("LOCAL_SERVER_TG_API_KEY_ID")
 LOCAL_SERVER_TG_API_HASH_ID = env.str("LOCAL_SERVER_TG_API_HASH_ID")
 
 logger = logging.getLogger(__name__)
+
 apihelper.API_URL = (
     f"http://0.0.0.0:8081/bot{LOCAL_SERVER_TG_API_KEY_ID}:{LOCAL_SERVER_TG_API_HASH_ID}"
 )
@@ -143,14 +144,10 @@ async def search_product(message):
                     )
 
 
-# async def log_out_function():
-#     await bot.log_out()
+async def log_out_function():
+    await bot.log_out()
 
 
 if __name__ == "__main__":
-
-    asyncio.run(
-        bot.infinity_polling(
-            logger_level=LOGGER_LEVEL, allowed_updates=util.update_types
-        )
-    )
+    log_out_function()
+    asyncio.run(bot.infinity_polling(allowed_updates=util.update_types))
