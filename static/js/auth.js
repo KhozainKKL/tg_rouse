@@ -44,7 +44,7 @@ $('.tab a').on('click', function (e) {
 document.addEventListener("DOMContentLoaded", function() {
 
     let tg = window.Telegram.WebApp;
-    document.getElementById("demo").innerHTML = tg.initDataUnsafe.user.id;
+    document.getElementById("demo").innerHTML = tg.initDataUnsafe.user.first_name;
     let register = document.getElementById("register");
     tg.expand();
 
