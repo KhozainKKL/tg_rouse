@@ -149,5 +149,5 @@ async def log_out_function():
 
 
 if __name__ == "__main__":
-    log_out_function()
+    # log_out_function()
     asyncio.run(bot.infinity_polling(allowed_updates=util.update_types))

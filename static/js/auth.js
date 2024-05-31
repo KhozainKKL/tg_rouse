@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
             is_verified: false,
             first_name: fisrt_name,
             last_name: last_name,
-            telegram_id: tg.initDataUnsafe,
+            telegram_id: tg.initDataUnsafe.user,
             phone: 0,
             geo: ""
         }
