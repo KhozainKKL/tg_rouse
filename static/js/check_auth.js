@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", async function(event) {
                 console.log(result);
 
             } else {
-                window.location.href = 'http://localhost:63342/tg_rouse/static/templates/auth.html';
+                window.location.href = 'https://khozainkkl.github.io/tg_rouse.github.io/static/templates/auth.html';
             }
         } catch (error) {
-            window.location.href = 'http://localhost:63342/tg_rouse/static/templates/auth.html';
+            window.location.href = 'https://khozainkkl.github.io/tg_rouse.github.io/static/templates/auth.html';
         }
 });

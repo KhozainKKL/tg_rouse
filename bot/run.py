@@ -35,10 +35,10 @@ bot = AsyncTeleBot(
 BASE_URL = env.str("BASE_URL")
 
 
-@bot.message_handler(commands=["login"])
+@bot.message_handler(commands=["app"])
 async def start_message(message):
     # Кодирование данных в формат URL и добавление их к URL веб-страницы
-    web_page_url = BASE_URL + "auth.html"
+    web_page_url = BASE_URL + "index.html"
 
     markup = InlineKeyboardMarkup()
     markup.add(
