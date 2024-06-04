@@ -61,8 +61,8 @@ async def cart(message):
         )
     )
     url = BASE_URL + f"cart.html?product={encoded_data}"
-    markup = ReplyKeyboardMarkup()
-    markup.add(KeyboardButton("Корзина 🧺", web_app=WebAppInfo(url=url)))
+    markup = InlineKeyboardMarkup()
+    markup.add(InlineKeyboardButton("Корзина 🧺", web_app=WebAppInfo(url=url)))
     await bot.send_message(chat_id=message.chat.id, text="Привет.", reply_markup=markup)
 
 
