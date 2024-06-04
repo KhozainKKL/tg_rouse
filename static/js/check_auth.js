@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
             if (response.ok) {
                 let result = await response.json();
                 tg.sendData(JSON.stringify(result));
-                console.log(result);
-
+                event.preventDefault();
+                window.location.href = 'https://khozainkkl.github.io/tg_rouse.github.io/static/templates/index.html';
             } else {
                 window.location.href = 'https://khozainkkl.github.io/tg_rouse.github.io/static/templates/auth.html';
             }
