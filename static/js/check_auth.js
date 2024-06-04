@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function(event) {
     event.preventDefault();
     var tg = window.Telegram.WebApp;
     tg.expand();
-    let post_in_html_telegram_id = tg.initDataUnsafe.user.id;
+    var post_in_html_telegram_id = tg.initDataUnsafe.user.id;
     function func_one() {
         try {
             let telegram_id = tg.initDataUnsafe.user.id;
