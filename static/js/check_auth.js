@@ -1,11 +1,13 @@
+
+
 document.addEventListener("DOMContentLoaded", async function(event) {
     event.preventDefault();
-    let tg = window.Telegram.WebApp;
+    var tg = window.Telegram.WebApp;
     tg.expand();
 
-
-    try {
-            let telegram_id= tg.initDataUnsafe.user.id;
+    function func_one() {
+        try {
+            let telegram_id = tg.initDataUnsafe.user.id;
             let response = await fetch('http://127.0.0.1:8080/api/v1/users/' + telegram_id, {
                 method: 'GET',
                 headers: {
@@ -24,4 +26,8 @@ document.addEventListener("DOMContentLoaded", async function(event) {
         } catch (error) {
             window.location.href = 'https://khozainkkl.github.io/tg_rouse.github.io/static/templates/auth.html';
         }
+        func_one = () => {};
+    }
+
+    func_one();
 });
