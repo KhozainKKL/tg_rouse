@@ -9,6 +9,7 @@ class Product(Base):
     name: Mapped[str]
     description: Mapped[str | None]
     price: Mapped[int]
+
     created_at: Mapped[datetime] = mapped_column(
         default=datetime.utcnow(),
     )

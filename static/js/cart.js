@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Измененная часть: функция для получения данных корзины пользователя
     async function getUserCart(telegramId) {
-        let response = await fetch('http://127.0.0.1:8080/api/v1/cart/' + 401182313, {
+        let response = await fetch('http://127.0.0.1:8080/api/v1/cart/' + tg.initDataUnsafe.user.id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Измененная часть: функция для заполнения корзины на основе данных API
     async function populateCart() {
-        let telegramId = 401182313;
+        let telegramId = tg.initDataUnsafe.user.id;
         let cartData = await getUserCart(telegramId);
 
         if (cartData.length > 0) {
